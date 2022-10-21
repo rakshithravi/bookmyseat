@@ -1,0 +1,41 @@
+<div class="bookMySeat">
+
+  <div class="movie-container">
+    <label>Pick a movie:</label>
+    <select id="movie" [(ngModel)]="selectedMovie">
+      <option value="{{movie}}" *ngFor="let movie of moviesAvailable">{{movie}}</option>
+    </select>
+
+    <select id="ticket" [(ngModel)]="numberOfTickets">
+      <option value="{{item}}" *ngFor="let item of ticketList">{{item}}</option>
+    </select>
+  </div>
+
+
+  <ul class="showcase">
+    <li>
+      <div class="seat"></div>
+      <small>N/A</small>
+    </li>
+
+    <li>
+      <div class="seat selected"></div>
+      <small>Selected</small>
+    </li>
+
+    <li>
+      <div class="seat occupied"></div>
+      <small>Occupied</small>
+    </li>
+  </ul>
+
+  <div class="container" *ngIf="selectedMovie && numberOfTickets">
+    <div class="screen"></div>
+    <div class="row" *ngFor="let item of data; let i  = index">
+      <div class="seat" [ngClass]="{selected: isSelected(i, j), occupied: seat.occupied}" *ngFor="let seat of item;let j = index"
+        (click)="selectSeat(i, j, seat)"></div>
+    </div>
+  </div>
+</div>
+
+<h1>You have selected {{selectedMovie}}</h1>
